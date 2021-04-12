@@ -10,7 +10,7 @@
 # Compiled Static libraries
 *.a
 *.lib
-
+.dub/
 # Executables
 *.exe
 
