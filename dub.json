@@ -1,9 +1,0 @@
-{
-	"authors": [
-		"Technetium Team"
-	],
-	"copyright": "Copyright © 2021, Technetium Team",
-	"description": "A simple esoteric programming language",
-	"license": "MIT",
-	"name": "loo"
-}
