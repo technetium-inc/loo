@@ -1,5 +1,5 @@
-cd source
-dmd app.d -of=../dist/main
-cd ../dist
-main ../examples/example.loo
+cd src
+g++ main.cpp
+a ../examples/example.loo
+del a.exe
 cd ..
