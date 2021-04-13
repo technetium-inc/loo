@@ -1,0 +1,9 @@
+{
+	"authors": [
+		"Technetium team"
+	],
+	"copyright": "Copyright © 2021, Technetium team",
+	"description": "A minimal D application.",
+	"license": "proprietary",
+	"name": "loo"
+}
