@@ -19,3 +19,6 @@ Decrements the ascii value
 
 ## `#`
 Print the current character
+
+## `;`
+Stop the execution
