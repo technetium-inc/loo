@@ -29,6 +29,42 @@ class LooException {
 	}
 }
 
+class LooLang {
+	private immutable string data;
+	private int line_number;
+	private int position;
+	private int ascii;
+
+	this(string data){
+		this.data = data;
+		this.line_number = 1;
+		this.position = 0;
+	}
+
+	public void executeLooLanguage() {
+		char character = this.current_character();
+		while(character != ';'){
+			if(character == '+'){
+				this.ascii += 1;
+			} else if(character == '-'){
+				this.ascii -= 1;
+			} else if(character == '#'){
+				write(cast(char) this.ascii);
+			}
+			this.position += 1;
+			character = this.current_character();
+		}
+	}
+
+	private char current_character() {
+		if(this.data.length == this.position){
+			return ';';
+		} else {
+			return this.data[this.position];
+		}
+ 	}
+}
+
 string read_file(string filename){
 	string data = "";
 	File file = File(filename, "r");
@@ -52,6 +88,6 @@ string find_filename(string[] arguments) {
 }
 
 void main(string[] args) {
-	string data = read_file(find_filename(args));
-	writeln(data);
+	LooLang loo = new LooLang(read_file(find_filename(args)));
+	loo.executeLooLanguage();
 }
