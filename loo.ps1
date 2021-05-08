@@ -1,10 +1,21 @@
 $filename = $args[0]
 
+<#
+Print out the parameter passed
+in along with the function
+#>
 function print($data){
     Write-Output $data
 }
 
+
+<#
+The main language parser which parser
+and executes the code based on the tokens
+#>
 function language($data){
+    # the value incremented and decremented
+    # based on the tokens
     [int]$character_value = 0
     for($index=0; $index -lt $data.Length; $index++){
         [string]$character = $data[$index]
@@ -26,6 +37,10 @@ function language($data){
     }
 }
 
+<#
+Check file existence and read
+the file if the file exists
+#>
 function readFileContent($filename){
     if (Test-Path $filename -PathType leaf) {
         $file = Get-Item $filename
