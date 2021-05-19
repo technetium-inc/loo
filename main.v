@@ -1,5 +1,23 @@
 import os
 
+struct Position {
+	position int,
+	data string
+}
+
+fn (position Position) increment(increment_by) int {
+	position.position += increment_by
+	return position.position
+}
+
+fn (position Position) current_character() byte {
+	if position.position == position.data.len {
+		return ';'
+	} else {
+		return position.data[position.position]
+	}
+}
+
 // Capturing the filename from the command
 // line arguments and throwing an error if
 // the filename is not mentioned
