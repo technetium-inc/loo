@@ -11,14 +11,16 @@ A simple hello world program
 --------------#+#
 ```
 
-## `+`
+## Commands
+
+### `+`
 Increments the ascii value
 
-## `-`
+### `-`
 Decrements the ascii value
 
-## `#`
+### `#`
 Print the current character
 
-## `;`
+### `;`
 Stop the execution
