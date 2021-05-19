@@ -30,8 +30,7 @@ fn create_byte_array(data string) []byte {
 fn execute(data string) {
 	data_array := data.split('')
 	mut ascii := 0
-	for index := 0; index < data_array.len; index++ {
-		current_character := data_array[index]
+	for current_character in data_array {
 		if current_character == '+' {
 			ascii += 1
 		} else if current_character == '-' {
