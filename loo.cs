@@ -1,60 +1,65 @@
 using System;
-using System.Collections.Generic;
 using System.IO;
 
-class MainClass {
-  public static void Main (string[] args) {
-    ArgumentParser parser = new ArgumentParser(args);
-		Tuple<string, Dictionary<string,string>> data = parser.createArgumentParser();
-		Interpreter loo = new Interpreter(data.Item1);
-  }
+class LanguageInterpreter
+{
+    // The command line argument passed in
+    // from which we collect the filename
+    private string[] _arguments;
 
-	private class Interpreter {
-		private readonly string filename;
+    // The ascii character as integer
+    private int _asciiCharacter;
 
-		public Interpreter(string filename){
-			this.filename = filename;
-		}
+    public LanguageInterpreter(string[] Arguments)
+    {
+        this._arguments = Arguments;
+    }
 
-		private string getFileContent(){
-			try {
-				return IO.File.ReadAllText(this.filename);
-			} catch(exception) {
-				return null;
-			}
-		}
-	}
+    public void Interpret(string Source) {
+        int CharacterIndex = 0;
+        while(CharacterIndex < Source.Length)
+        {
+            char Character = Source[CharacterIndex];
+            switch (Character)
+            {
+                case '+':
+                    this._asciiCharacter += 1;
+                    break;
+                case '-':
+                    this._asciiCharacter -= 1;
+                    break;
+                case ';':
+                    CharacterIndex = Source.Length;
+                    break;
+                case '#':
+                    // Cast the ascii character integer to a character
+                    // and write it to the screen without a newline
+                    char AsciiCharacter = (char) this._asciiCharacter;
+                    Console.Write(AsciiCharacter);
+                    break;
+            }
+            CharacterIndex++;
+        }
+    }
 
-	private class ArgumentParser{
-		private readonly string[] arguments;
-		private readonly int length;
+    public string GetSourceCode()
+    {
+        if (this._arguments.Length == 0) return "";
+        string FileName = this._arguments[0];
+        return File.ReadAllText(FileName);
+    }
+}
 
-		public ArgumentParser(string[] arguments){
-			this.arguments = arguments;
-			this.length = this.arguments.Length;
-		}
 
-		public Tuple<string, Dictionary<string, string>> createArgumentParser() {
-			string command = null;
-			Dictionary<string, string> parameters = new Dictionary<string, string>();
-			for(int index=0; index<this.arguments.Length; index++){
-				string current = this.arguments[index];
-				if(index == 0) {
-					command = current;
-					continue;
-				}
-				string[] statements = current.Split("=");
-				string key = statements[0];
-				string value = "";
-				if (statements.Length > 1){
-					value = statements[1];
-				}
-				parameters[key] = value;
-			}
-			return new Tuple<string, Dictionary<string,string>>(
-				command,
-				parameters
-			);
-		}
-	}
+namespace Language
+{
+    class Interpreter
+    {
+        public static void Main(string[] args)
+        {
+            LanguageInterpreter interpreter = new LanguageInterpreter(args);
+            interpreter.Interpret(interpreter.GetSourceCode());
+        }
+
+    }
 }
